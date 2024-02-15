@@ -49,7 +49,7 @@ import { Annotation } from './Annotation';
 import { Button } from '../../common/Button/Button';
 import { reactCleaner } from '../../utils/reactCleaner';
 import { sanitizeHtml } from '../../utils/html';
-import { Dicom } from "../../tags/object/dicom"
+import { Dicom } from "../../tags/object/Dicom/Dicom"
 // import { Dicom } from "../../tags/object/dicom"
 
 /**
@@ -214,10 +214,10 @@ class App extends Component {
     // tags can be styled in config when user is awaiting for suggestions from ML backend
     const mainContent = (
       <Block name="main-content" mix={store.awaitingSuggestions ? ['requesting'] : []}>
-        <Dicom/>
-        {/*{as.validation === null*/}
-        {/*  ? this._renderUI(as.selectedHistory?.root ?? root, as)*/}
-        {/*  : this.renderConfigValidationException(store)}*/}
+        {/* <Dicom/> */}
+        {as.validation === null
+          ? this._renderUI(as.selectedHistory?.root ?? root, as)
+          : this.renderConfigValidationException(store)}
       </Block>
     );
 

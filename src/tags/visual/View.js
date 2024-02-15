@@ -73,6 +73,7 @@ const Model = types
       'text',
       'audio',
       'image',
+      'dicom',
       'hypertext',
       'richtext',
       'timeseries',

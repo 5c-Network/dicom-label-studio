@@ -18227,10 +18227,10 @@ react-scripts@3.4.1:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-scroll-wheel-handler@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-scroll-wheel-handler/-/react-scroll-wheel-handler-1.1.5.tgz#57f207f9ef84a193ce9997771175f3184050e5a6"
-  integrity sha512-RrORWeLAxTLy0L5yUt1KmHVE5CSrH0j6PSOXl4QYyE7FXLbsaqaagtOkTfR/0g3XnvFGzuNt5l31MoR8ujickg==
+react-scroll-wheel-handler@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-wheel-handler/-/react-scroll-wheel-handler-2.2.0.tgz#8119f6befe374d70764511212fd91672cd5cfd7f"
+  integrity sha512-x1OqSyF5qzCEvX2C3Rgfm6BoOMwuV4JJezBZEkRkaMe0cnb9xrnsoYtwrKIJ+J1zRy3dZESoHdoAtepzW+xtKA==
 
 react-shallow-renderer@^16.13.1:
   version "16.14.1"

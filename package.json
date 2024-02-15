@@ -122,7 +122,7 @@
     "react-rnd": "^10.1.10",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-scroll-wheel-handler": "^1.1.5",
     "redux": "^4.0.5",
     "serialize-javascript": "^3.1.0",

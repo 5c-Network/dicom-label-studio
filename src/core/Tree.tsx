@@ -243,12 +243,11 @@ function renderItem(ref: IAnyStateTreeNode, annotation: IAnnotation, includeKey 
   const identifierAttribute = type.identifierAttribute;
   const typeName = type.name;
   const View = Registry.getViewByModel(typeName);
-
+  console.log(View)
   if (!View) {
     throw new Error(`No view for model: ${typeName}`);
   }
   const key = (identifierAttribute && el[identifierAttribute]) || guidGenerator();
-
   return <View key={includeKey ? key : undefined} item={el} />;
 }
 

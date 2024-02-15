@@ -25,7 +25,7 @@ class Item extends Component {
       // until it's loaded we need to skip the validation assuming that it's always ready,
       // otherwise we'll get a blank canvas
       if (o.type === 'image') return Promise.resolve();
-      
+
       return o.isReady
         ? Promise.resolve(o.isReady)
         : new Promise(resolve => {
@@ -130,10 +130,10 @@ export default class Grid extends Component {
     const current = Array.from(children).findIndex(child => container.scrollLeft <= child.offsetLeft);
 
     if (!container) return;
-    
+
     const count = this.props.annotations.length;
-    const next = current + delta; 
-    
+    const next = current + delta;
+
     if (next < 0 || next > count - 1) return;
     const newPosition = children[next].offsetLeft;
 

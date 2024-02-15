@@ -49,6 +49,8 @@ import { Annotation } from './Annotation';
 import { Button } from '../../common/Button/Button';
 import { reactCleaner } from '../../utils/reactCleaner';
 import { sanitizeHtml } from '../../utils/html';
+import { Dicom } from "../../tags/object/dicom"
+// import { Dicom } from "../../tags/object/dicom"
 
 /**
  * App
@@ -161,7 +163,6 @@ class App extends Component {
     return (
       <Elem name="infobar" tag={Space} size="small">
         <span>Task #{id}</span>
-
         {queue && <span>{queue}</span>}
       </Elem>
     );
@@ -197,7 +198,7 @@ class App extends Component {
     const as = store.annotationStore;
     const root = as.selected && as.selected.root;
     const { settings } = store;
-
+    console.log(as.selected?.root)
     if (store.isLoading) return this.renderLoader();
 
     if (store.noTask) return this.renderNothingToLabel(store);
@@ -213,6 +214,7 @@ class App extends Component {
     // tags can be styled in config when user is awaiting for suggestions from ML backend
     const mainContent = (
       <Block name="main-content" mix={store.awaitingSuggestions ? ['requesting'] : []}>
+        {/*<Dicom/>*/}
         {as.validation === null
           ? this._renderUI(as.selectedHistory?.root ?? root, as)
           : this.renderConfigValidationException(store)}
@@ -221,7 +223,7 @@ class App extends Component {
 
     const outlinerEnabled = isFF(FF_DEV_1170);
     const newUIEnabled = isFF(FF_DEV_3873);
-
+console.log({outlinerEnabled,newUIEnabled})
     return (
       <Block
         name="editor"
@@ -260,16 +262,19 @@ class App extends Component {
           >
             {outlinerEnabled ? (
               isFF(FF_DEV_3873) ? (
-                <SideTabsPanels
-                  panelsHidden={viewingAll}
-                  currentEntity={as.selectedHistory ?? as.selected}
-                  regions={as.selected.regionStore}
-                  showComments={store.hasInterface('annotations:comments')}
-                  focusTab={store.commentStore.tooltipMessage ? 'comments' : null}
-                >
-                  {mainContent}
-                  {isDefined(store) && store.hasInterface('topbar') && <BottomBar store={store} />}
-                </SideTabsPanels>
+                  <>
+                    <SideTabsPanels
+                        panelsHidden={viewingAll}
+                        currentEntity={as.selectedHistory ?? as.selected}
+                        regions={as.selected.regionStore}
+                        showComments={store.hasInterface('annotations:comments')}
+                        focusTab={store.commentStore.tooltipMessage ? 'comments' : null}
+                    >
+                      {mainContent}
+                      {isDefined(store) && store.hasInterface('topbar') && <BottomBar store={store} />}
+                    </SideTabsPanels>
+                    {/*<Dicom/>*/}
+                  </>
               ) : (
                 <SidePanels
                   panelsHidden={viewingAll}
@@ -277,14 +282,12 @@ class App extends Component {
                   regions={as.selected.regionStore}
                 >
                   {mainContent}
-
                   {isFF(FF_DEV_3873) && isDefined(store) && store.hasInterface('topbar') && <BottomBar store={store} />}
                 </SidePanels>
               )
             ) : (
               <>
                 {mainContent}
-
                 {viewingAll === false && (
                   <Block name="menu" mod={{ bsp: settings.bottomSidePanel }}>
                     {store.hasInterface('side-column') && (
@@ -302,7 +305,6 @@ class App extends Component {
                     )}
                   </Block>
                 )}
-
                 {newUIEnabled && isDefined(store) && store.hasInterface('topbar') && <BottomBar store={store} />}
               </>
             )}

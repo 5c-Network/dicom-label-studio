@@ -15,7 +15,7 @@ export const configureStore = async (params, events) => {
   if (params.options?.secureMode) window.LS_SECURE_MODE = true;
 
   const env = await getEnvironment();
-
+console.log(env)
   params = { ...params };
 
   if (!params?.config && env.getExample) {

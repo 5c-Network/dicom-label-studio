@@ -189,11 +189,11 @@ const validateToNameTag = (element, model, flatTree) => {
   if (!element.toname) return null;
 
   const names = element.toname.split(','); // for pairwise
-
+console.log("names ====>", element, model, flatTree, names);
   for (const name of names) {
     // Find referenced tag in the tree
     const controlledTag = flatTree.find(item => item.name === name);
-
+    console.log("contr", {controlledTag}, {flatTree});
     if (controlledTag === undefined) {
       return errorBuilder.tagNotFound(model.name, 'toname', name);
     }

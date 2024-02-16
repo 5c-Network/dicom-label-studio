@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './index.css'
 import {Provider} from 'react-redux'
 import store from './store'
@@ -7,6 +7,9 @@ import DicomApp from "./App"
 import Registry from '../../../core/Registry';
 import { inject } from 'mobx-react';
 import { destroy, getRoot, getType, types } from 'mobx-state-tree';
+import * as Tools from '../../../tools';
+import { Toolbar } from '../../../components/Toolbar/Toolbar';
+import ToolsManager from '../../../tools/Manager';
 // import { create as WebFontLoader } from "mathjs"
 
 // WebFontLoader.load({
@@ -44,20 +47,45 @@ const theme = createMuiTheme({
     },
   })
 
- const DicomView = () => {
-    return (
+ class DicomView extends Component {
+    renderTools() {
+        const { item, store } = this.props;
+        const cs = store.annotationStore;
+  
+        if (cs.viewingAllAnnotations || cs.viewingAllPredictions) return null;
+        console.log("hree", this.props);
+        const tools = item.getToolsManager().allTools();
+  
+        return (
+          <Toolbar tools={tools} />
+        );
+      };
+
+    render() {return (
         <Provider store={store}>
             <MuiThemeProvider theme = { theme }>
                 <DicomApp />
+                {this.renderTools()}
             </MuiThemeProvider>
-        </Provider>)
+        </Provider>)}
 }
 
 
 
 const Model = types.model({
   type: 'dicom',
-})
+  brushControl: types.optional(types.string, 'brush'),
+  mode: types.optional(types.enumeration(['drawing', 'viewing', 'brush', 'eraser']), 'viewing'),
+}).actions(self => {
+    const manager = ToolsManager.getInstance({ name: self.name });
+    function getToolsManager() {
+        return manager;
+      };
+
+      return {
+        getToolsManager
+      }
+});
 const TagAttrs = types.model({
   value: types.maybeNull(types.string),
   valuelist: types.maybeNull(types.string),

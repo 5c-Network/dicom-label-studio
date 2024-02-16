@@ -927,8 +927,8 @@ export default observer(
       const { item, store } = this.props;
       const cs = store.annotationStore;
 
+      console.log("imavecc", this.props, cs);
       if (cs.viewingAllAnnotations || cs.viewingAllPredictions) return null;
-
       const tools = item.getToolsManager().allTools();
 
       return (
